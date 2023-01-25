@@ -4,9 +4,11 @@ import {
   Button,
   CircularProgress,
   Container,
+  FormControl,
   MenuItem,
+  OutlinedInput,
   Paper,
-  TextField,
+  Select,
   Typography
 } from '@mui/material'
 import React from 'react'
@@ -69,26 +71,38 @@ export const UserEditPage = () => {
         elevation={8}
         sx={{ display: 'flex', flexDirection: 'column', gap: 2, p: 2 }}
       >
-        <TextField {...register('name')} label="name" />
-        <TextField {...register('email')} label="email" />
+        <FormControl>
+          <Typography>Name</Typography>
+          <OutlinedInput {...register('name')} />
+        </FormControl>
+        <FormControl>
+          <Typography>Email</Typography>
+          <OutlinedInput {...register('email')} />
+        </FormControl>
         <Controller
           control={control}
           name="gender"
           render={({ field: { value, onChange } }) => (
-            <TextField label="gender" select value={value || ''} onChange={onChange}>
-              <MenuItem value="female">female</MenuItem>
-              <MenuItem value="male">male</MenuItem>
-            </TextField>
+            <FormControl>
+              <Typography>Gender</Typography>
+              <Select value={value || ''} onChange={onChange}>
+                <MenuItem value="female">female</MenuItem>
+                <MenuItem value="male">male</MenuItem>
+              </Select>
+            </FormControl>
           )}
         />
         <Controller
           control={control}
           name="status"
           render={({ field: { value, onChange } }) => (
-            <TextField label="status" select value={value || ''} onChange={onChange}>
-              <MenuItem value="inactive">inactive</MenuItem>
-              <MenuItem value="active">active</MenuItem>
-            </TextField>
+            <FormControl>
+              <Typography>Status</Typography>
+              <Select value={value || ''} onChange={onChange}>
+                <MenuItem value="inactive">inactive</MenuItem>
+                <MenuItem value="active">active</MenuItem>
+              </Select>
+            </FormControl>
           )}
         />
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

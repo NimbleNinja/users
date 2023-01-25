@@ -1,14 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { AxiosResponse } from 'axios'
 import { getUsers } from '../../app/api'
 import { RootState } from '../../app/store'
-
-const initialState: IUsersState = {
-  list: [],
-  isLoading: true,
-  pagination: null,
-  filter: ''
-}
 
 export interface IUser {
   email: string
@@ -33,20 +25,24 @@ export interface IPagination {
 export type TStatus = 'loading' | 'idle'
 export interface IUsersState {
   list: IUser[]
+  current: IUser | null
   isLoading: boolean
   filter: '' | 'male' | 'female'
   pagination: IPagination | null
 }
 
-const USERS_GET = 'USERS_GET'
-
-export const getUsersThunk = createAsyncThunk<
-  AxiosResponse<{ data: IUser[]; meta: { pagination: IPagination } }>,
-  string
->(USERS_GET, async (params: string) => {
+export const getUsersThunk = createAsyncThunk('users/get', async (params: string) => {
   const res = await getUsers(params)
   return res
 })
+
+const initialState: IUsersState = {
+  list: [],
+  current: null,
+  isLoading: true,
+  pagination: null,
+  filter: ''
+}
 
 const usersReducer = createSlice({
   name: 'users',

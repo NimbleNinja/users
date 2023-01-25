@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { IUser } from '../features/users/usersSlice'
+import { IPagination, IUser } from '../features/users/usersSlice'
 
 export const BASE_URL = 'https://gorest.co.in/public/v1/users'
 
@@ -10,9 +10,14 @@ export const instance = axios.create({
   }
 })
 
+//AxiosResponse<{ data: IUser[]; meta: { pagination: IPagination } }>
+
 type TUserResponce = Promise<AxiosResponse<{ data: IUser; meta: null }>>
 
-export const getUsers = (params: string) => instance.get(params)
+export const getUsers = (
+  params: string
+): Promise<AxiosResponse<{ data: IUser[]; meta: { pagination: IPagination } }>> =>
+  instance.get(params)
 
 export const getUserById = (id: number): TUserResponce => instance.get(`/${id}`)
 
