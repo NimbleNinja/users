@@ -1,6 +1,6 @@
 # ArtMyWeb "Users" v2
 
-##### Netlify page [link](https://comforting-maamoul-0bf20d.netlify.app/#/).
+##### Github pages [link](https://nimbleninja.github.io/users/).
 
 #### Tech stack:
 
