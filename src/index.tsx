@@ -14,15 +14,15 @@ const root = createRoot(container)
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/home',
     element: <App />
   },
   {
-    path: 'users',
+    path: '/users',
     element: <UsersTable />
   },
   {
-    path: 'users/edit/:userId',
+    path: '/users/edit/:userId',
     element: <UserEditPage />
   }
 ])

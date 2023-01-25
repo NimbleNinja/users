@@ -68,7 +68,7 @@ export const UsersTable = () => {
         <CircularProgress size={60} color="inherit" />
       </Backdrop>
       <TableContainer>
-        <Button variant="outlined" onClick={() => navigate('/')}>
+        <Button variant="outlined" onClick={() => navigate('/home')}>
           home
         </Button>
         <Typography align="center" variant="h3">
