@@ -15,7 +15,7 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import {
@@ -38,8 +38,8 @@ export const UsersTable = () => {
   const filter = useAppSelector(filterSelector)
 
   useEffect(() => {
-    dispatch(getUsersThunk('?page=1&per_page=20'))
-  }, [dispatch])
+    dispatch(getUsersThunk(`?page=1&per_page=20${filter ? `&gender=${filter}` : ''}`))
+  }, [dispatch, filter])
 
   const rowHandler = useCallback(
     (id: number) => {
@@ -53,14 +53,10 @@ export const UsersTable = () => {
     (pageNumber: number) => {
       if (!pagination) return
 
-      dispatch(getUsersThunk(`?page=${pageNumber}&per_page=20`))
+      dispatch(getUsersThunk(`?page=${pageNumber}&per_page=20${filter ? `&gender=${filter}` : ''}`))
     },
-    [dispatch, pagination]
+    [dispatch, filter, pagination]
   )
-
-  const filteredUsers = useMemo(() => {
-    return filter ? users.filter(({ gender }) => gender === filter) : users
-  }, [filter, users])
 
   return (
     <Container>
@@ -96,7 +92,7 @@ export const UsersTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredUsers.map(({ id, name, email, gender, status }) => (
+            {users.map(({ id, name, email, gender, status }) => (
               <TableRow key={id} onClick={() => rowHandler(id)}>
                 <TableCell>{name}</TableCell>
                 <TableCell>{email}</TableCell>
