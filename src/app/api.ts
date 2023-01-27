@@ -10,8 +10,6 @@ export const instance = axios.create({
   }
 })
 
-//AxiosResponse<{ data: IUser[]; meta: { pagination: IPagination } }>
-
 type TUserResponce = Promise<AxiosResponse<{ data: IUser; meta: null }>>
 
 export const getUsers = (
